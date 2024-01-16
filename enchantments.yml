@@ -1,0 +1,3470 @@
+# << Example configuration >>
+# lastchance:    <-- Enchantment name
+#  display: "%group-color%Last Chance"    <-- Display in item lore
+#  description: "Has a chance to heal when on low hearts"    <-- Enchantment Description
+#  applies-to: "Chestplate"    <-- What applies to (display purposes)
+#  type: "DEFENSE"    <-- Enchantment type (controls when enchantment activates)
+#  group: "COMMON"    <-- Enchantment group (For enchanter and right-click random books)
+#  settings:
+#    required-enchants:
+#      - "springs:1" # Can require specific level
+#      - "gears"
+#    not-applyable-with:
+#      - "frozen"
+#  applies:    <-- List of items that it applies
+#    - ALL_CHESTPLATE    <-- Item(s) list
+#  levels:    < -- All Levels are under here
+#    1:     <-- Level indicator
+#      chance: 30    <-- Chance for enchantment to activate
+#      conditions: "%victim health% > 5 : %stop%"    <-- Condition (read more about it at Conditions)
+#      effects:    <-- All enchantment effects
+#        - "ADD_HEALTH:2 %victim%"    <-- Effect(s) list
+
+#  Display (String) (No spaces or enchantment will break)
+#    Determines how will enchantment look in item lore
+
+#  Applies-to (String)
+#    Display used in Custom Enchantment books for %description% variable
+
+#  Group (Setting)
+#    INFO: Create enchantment groups in config.yml under enchanter configuration.
+#   Enchantment groups are used for enchanter, to sell specific type books. You can group them
+#   and add a group-wide color, then obtain it with variable %group-color% (shown in example enchantments below).
+
+#  Enchantment Types List: https://ae.advancedplugins.net/enchantments/creating-enchantments/type-list
+
+#  Applies (Material)
+#    Determines which items will have the effects
+#    The Latest Materials list: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+#    NOTICE: You can use "LEATHER_ARMOR, IRON_ARMOR, CHAIN_ARMOR, GOLD_ARMOR or DIAMOND_ARMOR" to
+#    instantly add availability for all specific armor type pieces.
+#    Use "ALL_ARMOR" to add all armor pieces.
+#    Use "ALL_HELMET" to add all helmets.
+#    Use "ALL_CHESTPLATE" to add all chestplates.
+#    Use "ALL_BOOTS" to add all boots.
+#    Use "ALL_SWORD" to add all swords.
+#    Use "ALL_PICKAXE" to add all pickaxes.
+#    Use "ALL_AXE" to add all axes.
+#    Use "ALL_EDIBLE" to add all foods.
+#    And so on, but make sure to use non-plural names of items!
+
+#  Levels (Numbers)
+#    Effects for each level, use as display in examples.
+
+#  Enchantment Effect List: https://ae.advancedplugins.net/enchantments/creating-enchantments/effect-list
+
+#        # You can use tags <random word>word1,word2,word3</random word>, it will get a random word from listed words.
+#        # You can use tags <random number>x-y</random number> while x < y, it will generate a random number between two given integers.
+#        # e.g.: "STEAL_MONEY:<random number>10000-50000</random number>"
+#        # Use <chance>x</chance> to set per-effect chance, x being a chance percentage.
+#        # e.g.: "POTION:SPEED:1:100 %attacker% <chance>25</chance>"
+
+#        # You also may use %victim% or %attacker% flag to give effects to different players (in ATTACK, BOW, DEATH, KILL_PLAYER and DEFENSE types).
+#        # Example usage: - "POTION:POISON:1:50 %attacker%', this will give Level 2 POISON potion effect to the player who attacked.
+#        # If none is provided, effects will be given to the player who had custom enchanted item.
+#        # You can add %combo% instead of numbers, to use number of combo's player has (eg. to limit combo number: "%combo% > 0 && %combo% < 5 : %continue%')
+#        # You can add %damage% instead of numbers, to use number of damage has been done (for ATTACK and DEFENSE)
+
+#  Area of effect: https://ae.advancedplugins.net/enchantments/radius-of-effect-enchantments
+#  Conditions:  https://ae.advancedplugins.net/enchantments/enchantment-conditions
+
+# Settings for enchantments
+# *** This is not a required configuration section and each enchantment doesn't need to have it ***
+#  settings:
+#    required-enchants:
+#      - "springs"
+#    not-applyable-with:
+#      - "frozen"
+#    removeable: false # Makes enchantment non-removeable with blackscrolls
+#    disable-in-enchanter: true # Players can no longer obtain enchantment from Enchanter
+#    disabled-worlds: # List worlds in which enchantment will not work (cAsE sEnSiTiVe)
+#      - "My_World"
+planter:
+  display: '%group-color%小麦种植机'
+  description: |-
+    在3x3的面积种植 小麦种子
+    shift+右键使用此附魔.
+  applies-to: 锄头
+  type: RIGHT_CLICK
+  group: ULTIMATE
+  applies:
+    - ALL_HOE
+  levels:
+    '1':
+      conditions:
+        - '%player is sneaking% = true : %allow%'
+      cooldown: 3
+      effects:
+        - PLANT_SEEDS:1
+    '2':
+      conditions:
+        - '%player is sneaking% = true : %allow%'
+      cooldown: 2
+      effects:
+        - PLANT_SEEDS:1
+    '3':
+      conditions:
+        - '%player is sneaking% = true : %allow%'
+      effects:
+        - PLANT_SEEDS:1
+potatoplanter:
+  display: '%group-color%土豆种植机'
+  description: |-
+    在3x3的面积种植 土豆
+    shift+右键使用此附魔.
+  applies-to: 锄头
+  type: RIGHT_CLICK
+  group: ULTIMATE
+  applies:
+    - ALL_HOE
+  levels:
+    '1':
+      conditions:
+        - '%player is sneaking% = true : %allow%'
+      cooldown: 3
+      effects:
+        - PLANT_SEEDS:1:POTATO
+    '2':
+      conditions:
+        - '%player is sneaking% = true : %allow%'
+      cooldown: 2
+      effects:
+        - PLANT_SEEDS:1:POTATO
+    '3':
+      conditions:
+        - '%player is sneaking% = true : %allow%'
+      effects:
+        - PLANT_SEEDS:1:POTATO
+carrotplanter:
+  display: '%group-color%萝卜种植机'
+  description: |-
+    在3x3的面积种植 胡萝卜
+    shift+右键使用此附魔.
+  applies-to: 锄头
+  type: RIGHT_CLICK
+  group: ULTIMATE
+  applies:
+    - ALL_HOE
+  levels:
+    '1':
+      conditions:
+        - '%player is sneaking% = true : %allow%'
+      cooldown: 3
+      effects:
+        - PLANT_SEEDS:1:CARROT
+    '2':
+      conditions:
+        - '%player is sneaking% = true : %allow%'
+      cooldown: 2
+      effects:
+        - PLANT_SEEDS:1:CARROT
+    '3':
+      conditions:
+        - '%player is sneaking% = true : %allow%'
+      effects:
+        - PLANT_SEEDS:2:CARROT
+strike:
+  display: '%group-color%司空震'
+  description: |-
+    概率对攻击目标释放雷击
+  applies-to: 剑, 弓, 弩, 三叉戟
+  type: ATTACK;ATTACK_MOB;SHOOT;SHOOT_MOB
+  group: SIMPLE
+  applies:
+    - TRIDENT
+    - BOW
+    - CROSSBOW
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 10
+      cooldown: 3
+      effects:
+        - LIGHTNING @Victim
+    '2':
+      chance: 12
+      cooldown: 3
+      effects:
+        - LIGHTNING @Victim
+    '3':
+      chance: 13
+      cooldown: 4
+      effects:
+        - LIGHTNING @Victim
+impact:
+  display: '%group-color%巨力'
+  description: 概率造成双倍伤害?
+  applies-to: 三叉戟
+  type: SHOOT;SHOOT_MOB
+  group: ELITE
+  applies:
+    - TRIDENT
+  levels:
+    '1':
+      chance: 5
+      cooldown: 3
+      effects:
+        - DOUBLE_DAMAGE @Victim
+    '2':
+      chance: 8
+      cooldown: 3
+      effects:
+        - DOUBLE_DAMAGE @Victim
+    '3':
+      chance: 11
+      cooldown: 5
+      effects:
+        - DOUBLE_DAMAGE @Victim
+    '4':
+      chance: 14
+      cooldown: 6
+      effects:
+        - DOUBLE_DAMAGE @Victim
+twinge:
+  display: '%group-color%流血'
+  description: 攻击时让敌人流血造成伤害
+  applies-to: 三叉戟
+  type: ATTACK
+  group: LEGENDARY
+  applies:
+    - TRIDENT
+  levels:
+    '1':
+      chance: 5
+      cooldown: 3
+      effects:
+        - POTION:SLOW:0:100 @Victim
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - MESSAGE:§4You're bleeding! @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+    '2':
+      chance: 8
+      cooldown: 3
+      effects:
+        - POTION:SLOW:0:100 @Victim
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - MESSAGE:§4You're bleeding! @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+    '3':
+      chance: 11
+      cooldown: 5
+      effects:
+        - POTION:SLOW:0:100 @Victim
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - MESSAGE:§4You're bleeding! @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+    '4':
+      chance: 14
+      cooldown: 6
+      effects:
+        - POTION:SLOW:0:100 @Victim
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - MESSAGE:§4You're bleeding! @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+jellylegs:
+  display: '%group-color%果冻鞋'
+  description: 概率抵消掉落伤害
+  applies-to: 靴子
+  type: FALL_DAMAGE
+  group: ULTIMATE
+  applies:
+    - ALL_BOOTS
+  levels:
+    '1':
+      chance: 40
+      effects:
+        - CANCEL_EVENT
+    '2':
+      chance: 80
+      effects:
+        - CANCEL_EVENT
+    '3':
+      effects:
+        - CANCEL_EVENT
+aquatic:
+  display: '%group-color%水肺'
+  description: 可以在水下呼吸
+  applies-to: 头盔
+  type: EFFECT_STATIC
+  group: SIMPLE
+  applies:
+    - ALL_HELMET
+  levels:
+    '1':
+      effects:
+        - POTION:WATER_BREATHING:0
+smelting:
+  display: '%group-color%冶炼'
+  description: 有几率熔炼挖到的矿石
+  applies-to: 镐
+  type: MINING
+  group: SIMPLE
+  applies:
+    - ALL_PICKAXE
+    - ALL_SHOVEL
+  levels:
+    '1':
+      chance: 33
+      effects:
+        - SMELT
+    '2':
+      chance: 66
+      effects:
+        - SMELT
+    '3':
+      chance: 100
+      effects:
+        - SMELT
+experience:
+  display: '%group-color%经验采集'
+  description: 挖矿概率获取更多经验
+  applies-to: 工具
+  type: MINING
+  group: SIMPLE
+  applies:
+    - ALL_PICKAXE
+    - ALL_SPADE
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 15
+      cooldown: 1
+      conditions:
+        - '%block type% contains ORE : %allow%'
+      effects:
+        - EXP:<random number>2-5</random number> @Block
+    '2':
+      chance: 30
+      cooldown: 2
+      conditions:
+        - '%block type% contains ORE : %allow%'
+      effects:
+        - EXP:<random number>2-5</random number>
+    '3':
+      chance: 45
+      cooldown: 3
+      conditions:
+        - '%block type% contains ORE : %allow%'
+      effects:
+        - EXP:<random number>2-5</random number> @Block
+    '4':
+      chance: 60
+      cooldown: 4
+      conditions:
+        - '%block type% contains ORE : %allow%'
+      effects:
+        - EXP:<random number>2-5</random number> @Block
+    '5':
+      chance: 75
+      cooldown: 5
+      conditions:
+        - '%block type% contains ORE : %allow%'
+      effects:
+        - EXP:<random number>2-5</random number> @Block
+rebreather:
+  display: '%group-color%水下矿工'
+  description: 在水下采矿时概率获得水下呼吸
+  applies-to: 镐
+  type: MINING
+  group: SIMPLE
+  applies:
+    - ALL_PICKAXE
+  levels:
+    '1':
+      cooldown: 3
+      chance: 30
+      effects:
+        - AIR
+    '2':
+      cooldown: 3
+      chance: 60
+      effects:
+        - AIR
+forcefield:
+  display: '%group-color%排斥'
+  description: 概率把对手推开
+  applies-to: 剑
+  type: ATTACK;ATTACK_MOB
+  group: SIMPLE
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 30
+      cooldown: 12
+      effects:
+        - PULL_AWAY:1.0 @Victim
+    '2':
+      chance: 36
+      cooldown: 12
+      effects:
+        - PULL_AWAY:1.5 @Victim
+    '3':
+      chance: 42
+      cooldown: 12
+      effects:
+        - PULL_AWAY:2.0 @Victim
+    '4':
+      chance: 48
+      cooldown: 13
+      effects:
+        - PULL_AWAY:2.5 @Victim
+    '5':
+      chance: 54
+      cooldown: 13
+      effects:
+        - PULL_AWAY:3.0 @Victim
+famine:
+  display: '%group-color%饥饿之剑'
+  description: 概率对目标造成饥饿
+  applies-to: 武器
+  type: ATTACK
+  group: UNIQUE
+  applies:
+    - ALL_SWORD
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 12
+      cooldown: 8
+      effects:
+        - POTION:HUNGER:0:80 @Victim
+    '2':
+      chance: 15
+      cooldown: 8
+      effects:
+        - POTION:HUNGER:0:120 @Victim
+    '3':
+      chance: 18
+      cooldown: 8
+      effects:
+        - POTION:HUNGER:1:80 @Victim
+    '4':
+      chance: 22
+      cooldown: 8
+      effects:
+        - POTION:HUNGER:1:120 @Victim
+explosive:
+  display: '%group-color%爆炸弓'
+  description: 射出的箭有概率爆炸
+  applies-to: 弓
+  type: SHOOT;SHOOT_MOB
+  group: UNIQUE
+  applies:
+    - BOW
+  levels:
+    '1':
+      chance: 20
+      cooldown: 7
+      effects:
+        - TNT @Victim
+    '2':
+      chance: 30
+      cooldown: 8
+      effects:
+        - TNT @Victim
+    '3':
+      chance: 40
+      cooldown: 8
+      effects:
+        - TNT @Victim
+    '4':
+      chance: 50
+      cooldown: 8
+      effects:
+        - TNT @Victim
+    '5':
+      chance: 60
+      cooldown: 9
+      effects:
+        - TNT @Victim
+ravenous:
+  display: '%group-color%储备粮'
+  description: 战斗时概率恢复饱食度
+  applies-to: 武器
+  type: ATTACK;ATTACK_MOB
+  group: UNIQUE
+  applies:
+    - ALL_SWORD
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 14
+      cooldown: 2
+      effects:
+        - ADD_FOOD:<random number>1-4</random number> @Attacker
+    '2':
+      chance: 18
+      cooldown: 2
+      effects:
+        - ADD_FOOD:<random number>1-4</random number> @Attacker
+    '3':
+      chance: 22
+      cooldown: 2
+      effects:
+        - ADD_FOOD:<random number>1-4</random number> @Attacker
+    '4':
+      chance: 26
+      cooldown: 2
+      effects:
+        - ADD_FOOD:<random number>1-4</random number> @Attacker
+telepathy:
+  display: '%group-color%磁力'
+  description: 把被破坏的方块自动装在背包
+  applies-to: 工具
+  type: MINING
+  group: UNIQUE
+  applies:
+    - ALL_TOOLS
+    - SHEARS
+  levels:
+    '1':
+      chance: 40
+      effects:
+        - TP_DROPS @Block
+    '2':
+      chance: 60
+      effects:
+        - TP_DROPS @Block
+    '3':
+      chance: 80
+      effects:
+        - TP_DROPS @Block
+    '4':
+      effects:
+        - TP_DROPS @Block
+explosivedemise:
+  display: '%group-color%惊喜'
+  description: 死亡时概率生成一只苦力怕！
+  applies-to: 护腿
+  type: DEFENSE;DEFENSE_MOB
+  group: UNIQUE
+  applies:
+    - ALL_LEGGINGS
+  levels:
+    '1':
+      chance: 13
+      cooldown: 3
+      conditions:
+        - '%victim health% > 6 : %stop%'
+      effects:
+        - GUARD:CREEPER:8:1:@Victim
+        - POTION:BLINDNESS:0:40 @Attacker
+    '2':
+      chance: 17
+      cooldown: 3
+      conditions:
+        - '%victim health% > 6 : %stop%'
+      effects:
+        - GUARD:CREEPER:8:1:@Victim
+        - POTION:BLINDNESS:0:60 @Attacker
+    '3':
+      chance: 24
+      cooldown: 3
+      conditions:
+        - '%victim health% > 7 : %stop%'
+      effects:
+        - GUARD:CREEPER:8:1:@Victim
+        - POTION:BLINDNESS:0:100 @Attacker
+    '4':
+      chance: 30
+      cooldown: 3
+      conditions:
+        - '%victim health% > 7 : %stop%'
+      effects:
+        - GUARD:CREEPER:8:1:@Victim
+        - POTION:BLINDNESS:1:40 @Attacker
+    '5':
+      chance: 38
+      cooldown: 3
+      conditions:
+        - '%victim health% > 8 : %stop%'
+      effects:
+        - GUARD:CREEPER:8:2:@Victim
+        - POTION:BLINDNESS:1:80 @Attacker
+    '6':
+      chance: 46
+      cooldown: 3
+      conditions:
+        - '%victim health% > 8 : %stop%'
+      effects:
+        - GUARD:CREEPER:8:2:@Victim
+        - POTION:BLINDNESS:1:120 @Attacker
+    '7':
+      chance: 55
+      cooldown: 3
+      conditions:
+        - '%victim health% > 8 : %stop%'
+      effects:
+        - GUARD:CREEPER:8:2:@Victim
+        - POTION:BLINDNESS:2:60 @Attacker
+    '8':
+      chance: 69
+      cooldown: 3
+      conditions:
+        - '%victim health% > 8 : %stop%'
+      effects:
+        - GUARD:CREEPER:8:3:@Victim
+        - POTION:BLINDNESS:2:100 @Attacker
+enderslayer:
+  display: '%group-color%终末之诗'
+  description: 对末影人和末影龙伤害增加
+  applies-to: 武器
+  type: ATTACK_MOB
+  group: ELITE
+  applies:
+    - ALL_SWORD
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 16
+      cooldown: 2
+      conditions:
+        - '%mob type% = ENDERMAN or %mob type% = ENDER_DRAGON or %mob type% = ENDERDRAGON : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+    '2':
+      chance: 21
+      cooldown: 2
+      conditions:
+        - '%mob type% = ENDERMAN or %mob type% = ENDER_DRAGON or %mob type% = ENDERDRAGON : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+    '3':
+      chance: 29
+      cooldown: 2
+      conditions:
+        - '%mob type% = ENDERMAN or %mob type% = ENDER_DRAGON or %mob type% = ENDERDRAGON : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+    '4':
+      chance: 34
+      cooldown: 2
+      conditions:
+        - '%mob type% = ENDERMAN or %mob type% = ENDER_DRAGON or %mob type% = ENDERDRAGON : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+    '5':
+      chance: 41
+      cooldown: 2
+      conditions:
+        - '%mob type% = ENDERMAN or %mob type% = ENDER_DRAGON or %mob type% = ENDERDRAGON : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+slayer:
+  display: '%group-color%猎人'
+  description: 增加对被动生物的伤害
+  applies-to: 武器
+  type: ATTACK_MOB
+  group: UNIQUE
+  applies:
+    - ALL_SWORD
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 25
+      cooldown: 2
+      conditions:
+        - '%is hostile% = false : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+    '2':
+      chance: 50
+      cooldown: 2
+      conditions:
+        - '%is hostile% = false : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+    '3':
+      chance: 75
+      conditions:
+        - '%is hostile% = false : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+    '4':
+      conditions:
+        - '%is hostile% = false : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+hunter:
+  display: '%group-color%远程猎人'
+  description: 增加对被动生物的伤害
+  applies-to: 弓, 弩, 三叉戟
+  type: SHOOT_MOB
+  group: UNIQUE
+  applies:
+    - TRIDENT
+    - BOW
+    - CROSSBOW
+  levels:
+    '1':
+      chance: 25
+      cooldown: 2
+      conditions:
+        - '%is hostile% = false : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+    '2':
+      chance: 50
+      cooldown: 2
+      conditions:
+        - '%is hostile% = false : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+    '3':
+      chance: 75
+      conditions:
+        - '%is hostile% = false : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+    '4':
+      conditions:
+        - '%is hostile% = false : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+hook:
+  display: '%group-color%经验垂钓'
+  description: 垂钓获得更多经验
+  applies-to: 钓鱼竿
+  type: CATCH_FISH
+  group: ELITE
+  applies:
+    - FISHING_ROD
+  levels:
+    '1':
+      chance: 15
+      cooldown: 12
+      effects:
+        - EXP:%exp%
+    '2':
+      chance: 25
+      cooldown: 12
+      effects:
+        - EXP:%exp%
+    '3':
+      chance: 35
+      cooldown: 12
+      effects:
+        - EXP:%exp%
+bait:
+  display: '%group-color%幸运垂钓'
+  description: 概率获得双倍垂钓物品
+  applies-to: 钓鱼竿
+  type: CATCH_FISH
+  group: LEGENDARY
+  applies:
+    - FISHING_ROD
+  levels:
+    '1':
+      chance: 15
+      cooldown: 10
+      effects:
+        - MORE_DROPS:1
+    '2':
+      chance: 18
+      cooldown: 15
+      effects:
+        - MORE_DROPS:1
+    '3':
+      chance: 26
+      cooldown: 20
+      effects:
+        - MORE_DROPS:1
+snap:
+  display: '%group-color%巨力钓钩'
+  description: 将被击中的实体拉向你
+  applies-to: 钓鱼竿
+  type: CATCH_FISH
+  group: ELITE
+  applies:
+    - FISHING_ROD
+  levels:
+    '1':
+      chance: 15
+      cooldown: 4
+      conditions:
+        - '%caught% = PLAYER : %allow%'
+      effects:
+        - PULL_CLOSER:1 @Victim
+    '2':
+      chance: 25
+      cooldown: 6
+      conditions:
+        - '%caught% = PLAYER : %allow%'
+      effects:
+        - PULL_CLOSER:1.5 @Victim
+    '3':
+      conditions:
+        - '%caught% = PLAYER : %allow%'
+      effects:
+        - PULL_CLOSER:2 @Victim
+lucky:
+  display: '%group-color%运气垂钓'
+  description: 钓鱼时概率获得幸运效果
+  applies-to: 钓鱼竿
+  type: RIGHT_CLICK
+  group: ULTIMATE
+  applies:
+    - FISHING_ROD
+  levels:
+    '1':
+      chance: 75
+      cooldown: 12
+      effects:
+        - POTION:LUCK:1:1000
+    '2':
+      chance: 85
+      cooldown: 12
+      effects:
+        - POTION:LUCK:2:1000
+    '3':
+      chance: 95
+      cooldown: 12
+      effects:
+        - POTION:LUCK:3:1000
+permafrost:
+  display: '%group-color%冻伤'
+  description: 概率使玩家减速并持续流血
+  applies-to: 剑
+  type: ATTACK;ATTACK_MOB
+  group: ULTIMATE
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 7
+      cooldown: 50
+      effects:
+        - DO_HARM:1 @Victim
+        - BLOOD @Victim
+        - POTION:SLOW:0:20 @Victim
+        - WAIT:20
+        - DO_HARM:1 @Victim
+        - BLOOD @Attacker
+        - WAIT:20
+        - DO_HARM:1 @Victim
+        - BLOOD @Attacker
+    '2':
+      chance: 8
+      cooldown: 50
+      effects:
+        - DO_HARM:2 @Victim
+        - BLOOD @Victim
+        - POTION:SLOW:0:40 @Victim
+        - WAIT:20
+        - DO_HARM:2 @Victim
+        - BLOOD @Victim
+        - WAIT:20
+        - DO_HARM:1 @Victim
+        - BLOOD @Victim
+    '3':
+      chance: 9
+      cooldown: 50
+      effects:
+        - DO_HARM:3 @Victim
+        - BLOOD @Victim
+        - POTION:SLOW:0:50 @Victim
+        - WAIT:20
+        - DO_HARM:2 @Victim
+        - BLOOD @Victim
+        - WAIT:20
+        - DO_HARM:1 @Victim
+        - BLOOD @Victim
+    '4':
+      chance: 10
+      cooldown: 50
+      effects:
+        - DO_HARM:3 @Victim
+        - BLOOD @Victim
+        - POTION:SLOW:0:60 @Victim
+        - WAIT:20
+        - DO_HARM:2 @Victim
+        - BLOOD @Victim
+        - WAIT:20
+        - DO_HARM:2 @Victim
+        - BLOOD @Victim
+    '5':
+      chance: 25
+      cooldown: 50
+      effects:
+        - DO_HARM:3 @Victim
+        - BLOOD @Victim
+        - POTION:SLOW:1:60 @Victim
+        - WAIT:20
+        - DO_HARM:3 @Victim
+        - BLOOD @Attacker
+        - WAIT:20
+        - DO_HARM:2 @Victim
+        - BLOOD @Attacker
+reaper:
+  display: '%group-color%收割者'
+  description: 给对手凋零或者失明
+  applies-to: 斧
+  type: ATTACK
+  group: ELITE
+  applies:
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 8
+      cooldown: 16
+      effects:
+        - POTION:WITHER:0:35 @Victim
+        - POTION:BLINDNESS:0:35 @Victim
+    '2':
+      chance: 10
+      cooldown: 14
+      effects:
+        - POTION:WITHER:0:40 @Victim
+        - POTION:BLINDNESS:0:40 @Victim
+    '3':
+      chance: 12
+      cooldown: 12
+      effects:
+        - POTION:WITHER:0:50 @Victim
+        - POTION:BLINDNESS:0:50 @Victim
+    '4':
+      chance: 14
+      cooldown: 10
+      effects:
+        - POTION:WITHER:0:60 @Victim
+        - POTION:BLINDNESS:0:60 @Victim
+netherslayer:
+  display: '%group-color%地狱游者'
+  description: 对地狱的生物造成更高伤害
+  applies-to: 武器
+  type: ATTACK_MOB
+  group: ELITE
+  applies:
+    - ALL_SWORD
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 16
+      cooldown: 2
+      conditions:
+        - '%mob type% = BLAZE or %mob type% = ZOMBIE_PIGMAN or %mob type% = PIG_ZOMBIE or %mob type% = GHAST : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+    '2':
+      chance: 21
+      cooldown: 2
+      conditions:
+        - '%mob type% = BLAZE or %mob type% = ZOMBIE_PIGMAN or %mob type% = PIG_ZOMBIE or %mob type% = GHAST : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+    '3':
+      chance: 29
+      cooldown: 2
+      conditions:
+        - '%mob type% = BLAZE or %mob type% = ZOMBIE_PIGMAN or %mob type% = PIG_ZOMBIE or %mob type% = GHAST : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+    '4':
+      chance: 34
+      cooldown: 2
+      conditions:
+        - '%mob type% = BLAZE or %mob type% = ZOMBIE_PIGMAN or %mob type% = PIG_ZOMBIE or %mob type% = GHAST : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+    '5':
+      chance: 41
+      cooldown: 2
+      conditions:
+        - '%mob type% = BLAZE or %mob type% = ZOMBIE_PIGMAN or %mob type% = PIG_ZOMBIE or %mob type% = GHAST : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>10-40</random number> @Attacker
+allure:
+  display: '%group-color%引力'
+  description: 攻击概率把怪物拉向你
+  applies-to: 剑
+  type: ATTACK_MOB
+  group: ELITE
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 30
+      effects:
+        - PULL_CLOSER:1 @Victim
+    '2':
+      chance: 60
+      effects:
+        - PULL_CLOSER:1.5 @Victim
+    '3':
+      effects:
+        - PULL_CLOSER:2 @Victim
+poison:
+  display: '%group-color%毒刃'
+  description: 概率使目标中毒
+  applies-to: 武器
+  type: ATTACK;ATTACK_MOB
+  group: ELITE
+  applies:
+    - ALL_SWORD
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 6
+      cooldown: 2
+      effects:
+        - POTION:POISON:0:80 @Victim
+    '2':
+      chance: 22
+      cooldown: 2
+      effects:
+        - POTION:POISON:0:120 @Victim
+    '3':
+      chance: 35
+      cooldown: 2
+      effects:
+        - POTION:POISON:1:80 @Victim
+virus:
+  display: '%group-color%毒液'
+  description: 击中概率使目标中毒
+  applies-to: 弓, 弩, 三叉戟
+  type: SHOOT_MOB;SHOOT
+  group: UNIQUE
+  applies:
+    - TRIDENT
+    - BOW
+    - CROSSBOW
+  levels:
+    '1':
+      chance: 6
+      cooldown: 2
+      effects:
+        - POTION:POISON:0:80 @Victim
+    '2':
+      chance: 22
+      cooldown: 2
+      effects:
+        - POTION:POISON:0:120 @Victim
+    '3':
+      chance: 35
+      cooldown: 2
+      effects:
+        - POTION:POISON:1:80 @Victim
+poisoned:
+  display: '%group-color%毒甲'
+  description: 概率使攻击你的敌人中毒
+  applies-to: 装备护甲
+  type: DEFENSE;DEFENSE_MOB;DEFENSE_PROJECTILE
+  group: ELITE
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 8
+      cooldown: 6
+      effects:
+        - POTION:POISON:0:60 @Attacker
+    '2':
+      chance: 12
+      cooldown: 6
+      effects:
+        - POTION:POISON:0:120 @Attacker
+    '3':
+      chance: 17
+      cooldown: 6
+      effects:
+        - POTION:POISON:1:60 @Attacker
+    '4':
+      chance: 23
+      cooldown: 6
+      effects:
+        - POTION:POISON:1:120 @Attacker
+undeadruse:
+  display: '%group-color%亡灵之靴'
+  description: 当你被击中时，概率产生僵尸迷惑对方
+  applies-to: 靴子
+  type: DEFENSE;DEFENSE_MOB
+  group: ELITE
+  applies:
+    - ALL_BOOTS
+  levels:
+    '1':
+      chance: 3
+      cooldown: 6
+      effects:
+        - GUARD:ZOMBIE:8:2:@Victim
+    '2':
+      chance: 4
+      cooldown: 6
+      effects:
+        - GUARD:ZOMBIE:8:2:@Victim
+    '3':
+      chance: 5
+      cooldown: 6
+      effects:
+        - GUARD:ZOMBIE:8:2:@Victim
+    '4':
+      chance: 6
+      cooldown: 6
+      effects:
+        - GUARD:ZOMBIE:8:2:@Victim
+    '5':
+      chance: 7
+      cooldown: 6
+      effects:
+        - GUARD:ZOMBIE:8:2:@Victim
+    '6':
+      chance: 8
+      cooldown: 6
+      effects:
+        - GUARD:ZOMBIE:8:3:@Victim
+    '7':
+      chance: 10
+      cooldown: 6
+      effects:
+        - GUARD:ZOMBIE:8:3:@Victim
+    '8':
+      chance: 14
+      cooldown: 6
+      effects:
+        - GUARD:ZOMBIE:8:4:@Victim
+    '9':
+      chance: 18
+      cooldown: 6
+      effects:
+        - GUARD:ZOMBIE:8:4:@Victim
+    '10':
+      chance: 22
+      cooldown: 6
+      effects:
+        - GUARD:ZOMBIE:8:5:@Victim
+wither:
+  display: '%group-color%枯萎'
+  description: 概率使攻击你的人凋零
+  applies-to: 装备护甲
+  type: DEFENSE;DEFENSE_MOB
+  group: ELITE
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 9
+      cooldown: 3
+      effects:
+        - POTION:WITHER:0:60 @Attacker
+    '2':
+      chance: 11
+      cooldown: 3
+      effects:
+        - POTION:WITHER:0:100 @Attacker
+    '3':
+      chance: 14
+      cooldown: 3
+      effects:
+        - POTION:WITHER:0:140 @Attacker
+    '4':
+      chance: 17
+      cooldown: 3
+      effects:
+        - POTION:WITHER:1:60 @Attacker
+    '5':
+      chance: 21
+      cooldown: 3
+      effects:
+        - POTION:WITHER:1:100 @Attacker
+extinguish:
+  display: '%group-color%灭火'
+  description: |-
+    概率在着火时灭火
+  applies-to: 护腿
+  type: DEFENSE;DEFENSE_MOB;FIRE
+  group: ELITE
+  applies:
+    - ALL_LEGGINGS
+  levels:
+    '1':
+      chance: 20
+      effects:
+        - WAIT:1
+        - EXTINGUISH @Victim
+    '2':
+      chance: 60
+      effects:
+        - WAIT:1
+        - EXTINGUISH @Victim
+    '3':
+      chance: 80
+      effects:
+        - WAIT:1
+        - EXTINGUISH @Victim
+shockwave:
+  display: '%group-color%排斥'
+  description: 生命值较低时概率击退攻击者
+  applies-to: 胸甲
+  type: DEFENSE;DEFENSE_MOB
+  group: ELITE
+  applies:
+    - ALL_CHESTPLATE
+  levels:
+    '1':
+      chance: 10
+      cooldown: 4
+      conditions:
+        - '%victim health% > 5 : %stop%'
+      effects:
+        - PULL_AWAY:0.5 @Attacker
+    '2':
+      chance: 20
+      cooldown: 4
+      conditions:
+        - '%victim health% > 5 : %stop%'
+      effects:
+        - PULL_AWAY:1.0 @Attacker
+    '3':
+      chance: 30
+      cooldown: 4
+      conditions:
+        - '%victim health% > 5 : %stop%'
+      effects:
+        - PULL_AWAY:1.5 @Attacker
+    '4':
+      chance: 40
+      cooldown: 4
+      conditions:
+        - '%victim health% > 5 : %stop%'
+      effects:
+        - PULL_AWAY:2.0 @Attacker
+    '5':
+      chance: 50
+      cooldown: 4
+      conditions:
+        - '%victim health% > 5 : %stop%'
+      effects:
+        - PULL_AWAY:2.5 @Attacker
+greatsword:
+  display: '%group-color%猎人杀手'
+  description: 对正在使用弓箭的玩家造成双倍伤害
+  applies-to: 剑
+  type: ATTACK
+  group: ELITE
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 15
+      cooldown: 2
+      conditions:
+        - '%victim is holding% contains BOW : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>45-70</random number> @Attacker
+    '2':
+      chance: 25
+      cooldown: 2
+      conditions:
+        - '%victim is holding% contains BOW : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>75-90</random number> @Attacker
+    '3':
+      chance: 35
+      cooldown: 2
+      conditions:
+        - '%victim is holding% contains BOW : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>85-165</random number> @Attacker
+    '4':
+      chance: 45
+      cooldown: 2
+      conditions:
+        - '%victim is holding% contains BOW : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>105-205</random number>
+    '5':
+      chance: 55
+      cooldown: 2
+      conditions:
+        - '%victim is holding% contains BOW : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>105-205</random number>
+hardened:
+  display: '%group-color%锤炼'
+  description: 被玩家攻击时概率恢复耐久
+  applies-to: 装备护甲
+  type: DEFENSE
+  group: LEGENDARY
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 25
+      cooldown: 7
+      effects:
+        - ADD_DURABILITY_CURRENT_ITEM:-1 @Victim
+    '2':
+      chance: 35
+      cooldown: 7
+      effects:
+        - ADD_DURABILITY_CURRENT_ITEM:-1 @Victim
+    '3':
+      chance: 45
+      cooldown: 7
+      effects:
+        - ADD_DURABILITY_CURRENT_ITEM:-2 @Victim
+patch:
+  display: '%group-color%生物锤炼'
+  description: 被生物攻击时概率恢复耐久
+  applies-to: 装备护甲
+  type: DEFENSE_MOB
+  group: LEGENDARY
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 20
+      cooldown: 7
+      effects:
+        - ADD_DURABILITY_CURRENT_ITEM:-1 @Victim
+    '2':
+      chance: 30
+      cooldown: 7
+      effects:
+        - ADD_DURABILITY_CURRENT_ITEM:-1 @Victim
+    '3':
+      chance: 60
+      cooldown: 7
+      effects:
+        - ADD_DURABILITY_CURRENT_ITEM:-2 @Victim
+trickster:
+  display: '%group-color%偷袭'
+  description: 被攻击时概率出现在攻击者身后
+  applies-to: 装备护甲
+  type: DEFENSE;DEFENSE_MOB
+  group: ELITE
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 1
+      cooldown: 500
+      effects:
+        - TELEPORT_BEHIND @Victim
+    '2':
+      chance: 3
+      cooldown: 500
+      effects:
+        - TELEPORT_BEHIND @Victim
+    '3':
+      chance: 5
+      cooldown: 500
+      effects:
+        - TELEPORT_BEHIND @Victim
+    '4':
+      chance: 10
+      cooldown: 500
+      effects:
+        - TELEPORT_BEHIND @Victim
+    '5':
+      chance: 20
+      cooldown: 500
+      effects:
+        - TELEPORT_BEHIND @Victim
+    '6':
+      chance: 30
+      cooldown: 500
+      effects:
+        - TELEPORT_BEHIND @Victim
+    '7':
+      chance: 40
+      cooldown: 500
+      effects:
+        - TELEPORT_BEHIND @Victim
+    '8':
+      chance: 50
+      cooldown: 500
+      effects:
+        - TELEPORT_BEHIND @Victim
+timber:
+  display: '%group-color%伐木'
+  description: 概率砍掉整棵树
+  applies-to: 斧
+  group: ULTIMATE
+  type: MINING
+  applies:
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 15
+      cooldown: 5
+      effects:
+        - BREAK_TREE @Block
+    '2':
+      chance: 35
+      cooldown: 5
+      effects:
+        - BREAK_TREE @Block
+    '3':
+      chance: 55
+      cooldown: 6
+      effects:
+        - BREAK_TREE @Block
+ambit:
+  display: '%group-color%范围杀怪'
+  description: "概率增加击杀怪物的范围"
+  applies-to: 武器
+  type: ATTACK_MOB
+  group: ULTIMATE
+  applies:
+    - ALL_SWORD
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 4
+      cooldown: 8
+      effects:
+        - DO_HARM:<random number>1-2</random number> @Aoe{radius=7,target=mobs}
+    '2':
+      chance: 5
+      cooldown: 8
+      effects:
+        - DO_HARM:<random number>1-2</random number> @Aoe{radius=2,target=mobs}
+    '3':
+      chance: 6
+      cooldown: 9
+      effects:
+        - DO_HARM:<random number>1-3</random number> @Aoe{radius=3,target=mobs}
+    '4':
+      chance: 7
+      cooldown: 9
+      effects:
+        - DO_HARM:<random number>1-3</random number> @Aoe{radius=4,target=mobs}
+    '5':
+      chance: 9
+      cooldown: 10
+      effects:
+        - DO_HARM:<random number>2-3</random number> @Aoe{radius=5,target=mobs}
+    '6':
+      chance: 12
+      cooldown: 12
+      effects:
+        - DO_HARM:<random number>2-3</random number> @Aoe{radius=6,target=mobs}
+    '7':
+      chance: 15
+      cooldown: 14
+      effects:
+        - DO_HARM:<random number>2-3</random number> @Aoe{radius=7,target=mobs}
+arrowdeflect:
+  display: '%group-color%暗箭能防'
+  description: 概率免疫箭的伤害.
+  applies-to: 装备护甲
+  type: DEFENSE_PROJECTILE
+  group: ULTIMATE
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 15
+      cooldown: 6
+      effects:
+        - CANCEL_EVENT
+    '2':
+      chance: 25
+      cooldown: 6
+      effects:
+        - CANCEL_EVENT
+    '3':
+      chance: 35
+      cooldown: 6
+      effects:
+        - CANCEL_EVENT
+    '4':
+      chance: 45
+      cooldown: 6
+      effects:
+        - CANCEL_EVENT
+arrowbreak:
+  display: '%group-color%避箭'
+  description: "持有时概率弹开身上的箭"
+  applies-to: 斧
+  type: DEFENSE_PROJECTILE
+  group: ULTIMATE
+  applies:
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 15
+      cooldown: 8
+      effects:
+        - CANCEL_EVENT
+        - PLAY_SOUND:ENTITY_ITEM_BREAK:2 @Victim
+    '2':
+      chance: 25
+      cooldown: 8
+      effects:
+        - CANCEL_EVENT
+        - PLAY_SOUND:ENTITY_ITEM_BREAK:2 @Victim
+    '3':
+      chance: 35
+      cooldown: 8
+      effects:
+        - CANCEL_EVENT
+        - PLAY_SOUND:ENTITY_ITEM_BREAK:2 @Victim
+    '4':
+      chance: 45
+      cooldown: 9
+      effects:
+        - CANCEL_EVENT
+        - PLAY_SOUND:ENTITY_ITEM_BREAK:2 @Victim
+    '5':
+      chance: 55
+      cooldown: 9
+      effects:
+        - CANCEL_EVENT
+        - PLAY_SOUND:ENTITY_ITEM_BREAK:2 @Victim
+    '6':
+      chance: 65
+      cooldown: 10
+      effects:
+        - CANCEL_EVENT
+        - PLAY_SOUND:ENTITY_ITEM_BREAK:2 @Victim
+exalted:
+  display: '%group-color%净化'
+  description: 攻击时概率解除自身全部效果
+  applies-to: 剑
+  type: ATTACK
+  group: ULTIMATE
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 12
+      cooldown: 8
+      effects:
+        - CURE:SLOW @Attacker
+        - CURE:CONFUSION @Attacker
+        - CURE:BLINDNESS @Attacker
+        - CURE:POISON @Attacker
+        - CURE:WITHER @Attacker
+        - CURE:HUNGER @Attacker
+        - CURE:WEAKNESS @Attacker
+        - CURE:SLOW_DIGGING @Attacker
+    '2':
+      chance: 16
+      cooldown: 8
+      effects:
+        - CURE:SLOW @Attacker
+        - CURE:CONFUSION @Attacker
+        - CURE:BLINDNESS @Attacker
+        - CURE:POISON @Attacker
+        - CURE:WITHER @Attacker
+        - CURE:HUNGER @Attacker
+        - CURE:WEAKNESS @Attacker
+        - CURE:SLOW_DIGGING @Attacker
+    '3':
+      chance: 22
+      cooldown: 8
+      effects:
+        - CURE:SLOW @Attacker
+        - CURE:CONFUSION @Attacker
+        - CURE:BLINDNESS @Attacker
+        - CURE:POISON @Attacker
+        - CURE:WITHER @Attacker
+        - CURE:HUNGER @Attacker
+        - CURE:WEAKNESS @Attacker
+        - CURE:SLOW_DIGGING @Attacker
+    '4':
+      chance: 36
+      cooldown: 8
+      effects:
+        - CURE:SLOW @Attacker
+        - CURE:CONFUSION @Attacker
+        - CURE:BLINDNESS @Attacker
+        - CURE:POISON @Attacker
+        - CURE:WITHER @Attacker
+        - CURE:HUNGER @Attacker
+        - CURE:WEAKNESS @Attacker
+        - CURE:SLOW_DIGGING @Attacker
+trench:
+  display: '%group-color%范围破坏'
+  description: 概率破坏前方3x3方块.
+  applies-to: 镐
+  type: MINING
+  group: ULTIMATE
+  applies:
+    - ALL_PICKAXE
+    #- ALL_SPADE
+    #- ALL_SHOVEL
+  levels:
+    '1':
+      chance: 13
+      effects:
+        - BREAK_BLOCK @Trench{r=3}
+    '2':
+      chance: 26
+      effects:
+        - BREAK_BLOCK @Trench{r=3}
+    '3':
+      chance: 36
+      effects:
+        - BREAK_BLOCK @Trench{r=3}
+    '4':
+      chance: 49
+      effects:
+        - BREAK_BLOCK @Trench{r=3}
+    '5':
+      chance: 59
+      effects:
+        - BREAK_BLOCK @Trench{r=3}
+    '6':
+      chance: 72
+      effects:
+        - BREAK_BLOCK @Trench{r=3}
+    '7':
+      chance: 85
+      effects:
+        - BREAK_BLOCK @Trench{r=3}
+    '8':
+      chance: 90
+      effects:
+        - BREAK_BLOCK @Trench{r=3}
+    '9':
+      chance: 100
+      effects:
+        - BREAK_BLOCK @Trench{r=3}
+dodge:
+  display: '%group-color%规避'
+  description: |-
+    概率闪避物理攻击
+    潜行时概率增加
+  applies-to: 装备护甲
+  type: DEFENSE
+  group: ULTIMATE
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 1
+      cooldown: 80
+      conditions:
+        - '%victim is sneaking% = true : %chance%+7'
+      effects:
+        - CANCEL_EVENT
+        - PLAY_SOUND:ENTITY_BAT_TAKEOFF:0.7 @Victim
+    '2':
+      chance: 2
+      cooldown: 70
+      conditions:
+        - '%victim is sneaking% = true : %chance%+7'
+      effects:
+        - CANCEL_EVENT
+        - PLAY_SOUND:ENTITY_BAT_TAKEOFF:0.7 @Victim
+    '3':
+      chance: 3
+      cooldown: 80
+      conditions:
+        - '%victim is sneaking% = true : %chance%+7'
+      effects:
+        - CANCEL_EVENT
+        - PLAY_SOUND:ENTITY_BAT_TAKEOFF:0.7 @Victim
+    '4':
+      chance: 4
+      cooldown: 70
+      conditions:
+        - '%victim is sneaking% = true : %chance%+7'
+      effects:
+        - CANCEL_EVENT
+        - PLAY_SOUND:ENTITY_BAT_TAKEOFF:0.7 @Victim
+    '5':
+      chance: 5
+      cooldown: 70
+      conditions:
+        - '%victim is sneaking% = true : %chance%+7'
+      effects:
+        - CANCEL_EVENT
+        - PLAY_SOUND:ENTITY_BAT_TAKEOFF:0.7 @Victim
+fumble:
+  display: '%group-color%引爆'
+  description: 被敌人的箭击中时概率引爆敌人
+  applies-to: 胸甲
+  type: DEFENSE_PROJECTILE
+  group: LEGENDARY
+  applies:
+    - ALL_CHESTPLATE
+  levels:
+    '1':
+      chance: 1
+      cooldown: 8
+      effects:
+        - TNT:1 @Attacker
+        - PLAY_SOUND:ENCHANT_THORNS_HIT:1:1 @Victim
+    '2':
+      chance: 5
+      cooldown: 8
+      effects:
+        - TNT:1 @Attacker
+        - PLAY_SOUND:ENCHANT_THORNS_HIT:1:1 @Victim
+    '3':
+      chance: 10
+      cooldown: 8
+      effects:
+        - TNT:1 @Attacker
+        - PLAY_SOUND:ENCHANT_THORNS_HIT:1:1 @Victim
+guardians:
+  display: '%group-color%监护守卫'
+  description: 概率生成铁傀儡来帮助你
+  applies-to: 装备护甲
+  type: DEFENSE
+  group: ULTIMATE
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 6
+      cooldown: 800
+      effects:
+        - GUARD:IRON_GOLEM:8:1 @Victim
+    '2':
+      chance: 9
+      cooldown: 800
+      effects:
+        - GUARD:IRON_GOLEM:8:1 @Victim
+    '3':
+      chance: 13
+      cooldown: 800
+      effects:
+        - GUARD:IRON_GOLEM:8:1 @Victim
+    '4':
+      chance: 14
+      cooldown: 800
+      effects:
+        - GUARD:IRON_GOLEM:8:1 @Victim
+    '5':
+      chance: 16
+      cooldown: 700
+      effects:
+        - GUARD:IRON_GOLEM:8:1 @Victim
+    '6':
+      chance: 17
+      cooldown: 600
+      effects:
+        - GUARD:IRON_GOLEM:8:2 @Victim
+    '7':
+      chance: 18
+      cooldown: 500
+      effects:
+        - GUARD:IRON_GOLEM:8:2 @Victim
+    '8':
+      chance: 20
+      cooldown: 500
+      effects:
+        - GUARD:IRON_GOLEM:8:3 @Victim
+    '9':
+      chance: 22
+      cooldown: 500
+      effects:
+        - GUARD:IRON_GOLEM:8:3 @Victim
+    '10':
+      chance: 24
+      cooldown: 500
+      effects:
+        - GUARD:IRON_GOLEM:8:4 @Victim
+iceaspect:
+  display: '%group-color%冰刃'
+  description: 有概率使对手缓慢
+  applies-to: 剑
+  type: ATTACK;ATTACK_MOB
+  group: ULTIMATE
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 15
+      cooldown: 2
+      effects:
+        - POTION:SLOW:1:50 @Victim
+    '2':
+      chance: 23
+      cooldown: 2
+      effects:
+        - POTION:SLOW:1:50 @Victim
+    '3':
+      chance: 25
+      cooldown: 2
+      effects:
+        - POTION:SLOW:1:50 @Victim
+momentum:
+  display: '%group-color%烟花超速'
+  description: 在使用烟花加速时，有概率变得更快
+  applies-to: 鞘翅
+  type: RIGHT_CLICK
+  group: ELITE
+  applies:
+    - ELYTRA
+  levels:
+    '1':
+      chance: 10
+      cooldown: 5
+      conditions:
+        - '%player is holding% = FIREWORK_ROCKET : %allow%'
+      effects:
+        - POTION:SPEED:0:40
+    '2':
+      chance: 25
+      cooldown: 5
+      conditions:
+        - '%player is holding% = FIREWORK_ROCKET : %allow%'
+      effects:
+        - POTION:SPEED:1:60
+    '3':
+      chance: 45
+      cooldown: 5
+      conditions:
+        - '%player is holding% = FIREWORK_ROCKET : %allow%'
+      effects:
+        - POTION:SPEED:2:80
+reinforced:
+  display: '%group-color%鞘翅保护'
+  description: 减少受到的伤害
+  applies-to: 鞘翅
+  type: DEFENSE;DEFENSE_MOB;DEFENSE_PROJECTILE
+  group: ULTIMATE
+  applies:
+    - ELYTRA
+  levels:
+    '1':
+      chance: 15
+      cooldown: 1
+      effects:
+        - DECREASE_DAMAGE:15
+    '2':
+      chance: 45
+      cooldown: 1
+      effects:
+        - DECREASE_DAMAGE:25
+    '3':
+      chance: 60
+      cooldown: 1
+      effects:
+        - DECREASE_DAMAGE:35
+    '4':
+      chance: 75
+      cooldown: 1
+      effects:
+        - DECREASE_DAMAGE:45
+restore:
+  display: '%group-color%修复'
+  description: |-
+    概率在工具坏掉时恢复一半耐久
+    但是会有概率失去这个附魔
+  applies-to: 工具
+  type: ITEM_BREAK
+  group: FABLED
+  applies:
+    - ALL_PICKAXE
+    - ALL_SPADE
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 40
+      effects:
+        - ADD_DURABILITY_CURRENT_ITEM:<round><math>-1 * (%maximum durability%/2)</math></round>
+        - REMOVE_ENCHANT:restore
+        - PLAY_SOUND:ITEM_TOTEM_USE
+    '2':
+      chance: 60
+      effects:
+        - ADD_DURABILITY_CURRENT_ITEM:<round><math>-1 * (%maximum durability%/2)</math></round>
+        - REMOVE_ENCHANT:restore
+        - PLAY_SOUND:ITEM_TOTEM_USE
+    '3':
+      chance: 80
+      effects:
+        - ADD_DURABILITY_CURRENT_ITEM:<round><math>-1 * (%maximum durability%/2)</math></round>
+        - REMOVE_ENCHANT:restore
+        - PLAY_SOUND:ITEM_TOTEM_USE
+    '4':
+      chance: 100
+      effects:
+        - ADD_DURABILITY_CURRENT_ITEM:<round><math>-1 * (%maximum durability%/2)</math></round>
+        - REMOVE_ENCHANT:restore
+        - PLAY_SOUND:ITEM_TOTEM_USE
+implants:
+  display: '%group-color%食物补充'
+  description: 每隔几秒概率恢复饱食度
+  applies-to: 头盔
+  type: REPEATING
+  group: ULTIMATE
+  applies:
+    - ALL_HELMET
+  levels:
+    '1':
+      chance: 30
+      time: 5
+      effects:
+        - ADD_FOOD:1
+    '2':
+      chance: 50
+      time: 5
+      effects:
+        - ADD_FOOD:1
+    '3':
+      chance: 70
+      time: 5
+      effects:
+        - ADD_FOOD:1
+piercing:
+  display: '%group-color%穿刺'
+  description: 造成更多伤害
+  applies-to: 弓, 弩
+  type: SHOOT;SHOOT_MOB
+  group: ULTIMATE
+  applies:
+    - BOW
+    - CROSSBOW
+  levels:
+    '1':
+      chance: 1
+      cooldown: 3
+      effects:
+        - INCREASE_DAMAGE:<random number>50-150</random number> @Victim
+    '2':
+      chance: 2
+      cooldown: 3
+      effects:
+        - INCREASE_DAMAGE:<random number>50-150</random number> @Victim
+    '3':
+      chance: 3
+      cooldown: 3
+      effects:
+        - INCREASE_DAMAGE:<random number>50-150</random number> @Victim
+    '4':
+      chance: 4
+      cooldown: 3
+      effects:
+        - INCREASE_DAMAGE:<random number>50-150</random number> @Victim
+    '5':
+      chance: 5
+      cooldown: 3
+      effects:
+        - INCREASE_DAMAGE:<random number>50-150</random number> @Victim
+poseidon:
+  display: '%group-color%波塞冬'
+  description: 增加三叉戟的伤害
+  applies-to: 三叉戟
+  type: SHOOT;SHOOT_MOB
+  group: ELITE
+  applies:
+    - TRIDENT
+  levels:
+    '1':
+      chance: 13
+      cooldown: 3
+      conditions:
+        - '%item type% = TRIDENT : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>50-150</random number> @Victim
+    '2':
+      chance: 19
+      cooldown: 3
+      conditions:
+        - '%item type% = TRIDENT : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>50-150</random number> @Victim
+    '3':
+      chance: 25
+      cooldown: 3
+      conditions:
+        - '%item type% = TRIDENT : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>50-150</random number> @Victim
+    '4':
+      chance: 32
+      cooldown: 3
+      conditions:
+        - '%item type% = TRIDENT : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>50-150</random number> @Victim
+safeguard:
+  display: '%group-color%维护'
+  description: 受伤时概率恢复耐久
+  applies-to: 装备护甲
+  type: DEFENSE;DEFENSE_MOB
+  group: ULTIMATE
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 5
+      cooldown: 5
+      effects:
+        - POTION:DAMAGE_RESISTANCE:0:60 @Victim
+    '2':
+      chance: 9
+      cooldown: 5
+      effects:
+        - POTION:DAMAGE_RESISTANCE:1:60 @Victim
+disappear:
+  display: '%group-color%垂危隐身'
+  description: |-
+    生命较低时概率隐身
+  applies-to: 装备护甲
+  type: DEFENSE;DEFENSE_MOB
+  group: ULTIMATE
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 20
+      cooldown: 20
+      conditions:
+        - '%victim health% > 5 : %stop%'
+      effects:
+        - POTION:INVISIBILITY:2:60 @Victim
+    '2':
+      chance: 23
+      cooldown: 20
+      conditions:
+        - '%victim health% > 6 : %stop%'
+      effects:
+        - POTION:INVISIBILITY:2:80 @Victim
+    '3':
+      chance: 26
+      cooldown: 20
+      conditions:
+        - '%victim health% > 7 : %stop%'
+      effects:
+        - POTION:INVISIBILITY:2:100 @Victim
+    '4':
+      chance: 30
+      cooldown: 20
+      conditions:
+        - '%victim health% > 8 : %stop%'
+      effects:
+        - POTION:INVISIBILITY:2:120 @Victim
+confuse:
+  display: '%group-color%混沌'
+  description: 概率使你攻击的敌人获得反胃
+  applies-to: 剑
+  type: ATTACK
+  group: ULTIMATE
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 12
+      cooldown: 6
+      effects:
+        - POTION:CONFUSION:0:60 @Victim
+    '2':
+      chance: 14
+      cooldown: 7
+      effects:
+        - POTION:CONFUSION:1:60 @Victim
+    '3':
+      chance: 16
+      cooldown: 8
+      effects:
+        - POTION:CONFUSION:2:60 @Victim
+    '4':
+      chance: 18
+      cooldown: 8
+      effects:
+        - POTION:CONFUSION:3:60 @Victim
+disintegrate:
+  display: '%group-color%装备粉碎'
+  description: 攻击时概率对敌人护甲造成额外耐久消耗
+  applies-to: 剑
+  type: ATTACK
+  group: ULTIMATE
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 12
+      cooldown: 2
+      effects:
+        - DAMAGE_ARMOR:2 @Victim
+    '2':
+      chance: 25
+      cooldown: 2
+      effects:
+        - DAMAGE_ARMOR:2 @Victim
+    '3':
+      chance: 39
+      cooldown: 2
+      effects:
+        - DAMAGE_ARMOR:2 @Victim
+    '4':
+      chance: 46
+      cooldown: 2
+      effects:
+        - DAMAGE_ARMOR:2 @Victim
+shatter:
+  display: '%group-color%持续伤害'
+  description: 攻击概率使敌人持续掉血
+  applies-to: 斧
+  type: ATTACK
+  group: ULTIMATE
+  applies:
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 12
+      cooldown: 2
+      effects:
+        - DAMAGE_ARMOR:2 @Victim
+    '2':
+      chance: 25
+      cooldown: 2
+      effects:
+        - DAMAGE_ARMOR:2 @Victim
+    '3':
+      chance: 39
+      cooldown: 2
+      effects:
+        - DAMAGE_ARMOR:2 @Victim
+    '4':
+      chance: 46
+      cooldown: 2
+      effects:
+        - DAMAGE_ARMOR:2 @Victim
+heavy:
+  display: '%group-color%弓箭保护'
+  description: 每一级降低弓箭伤害的2%
+  applies-to: 装备护甲
+  type: DEFENSE;DEFENSE_PROJECTILE
+  group: ULTIMATE
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 4
+      cooldown: 4
+      conditions:
+        - '%attacker is holding% = BOW : %allow%'
+      effects:
+        - DECREASE_DAMAGE:2 @Victim
+    '2':
+      chance: 9
+      cooldown: 4
+      conditions:
+        - '%attacker is holding% = BOW : %allow%'
+      effects:
+        - DECREASE_DAMAGE:4 @Victim
+    '3':
+      chance: 12
+      cooldown: 4
+      conditions:
+        - '%attacker is holding% = BOW : %allow%'
+      effects:
+        - DECREASE_DAMAGE:6 @Victim
+    '4':
+      chance: 16
+      cooldown: 4
+      conditions:
+        - '%attacker is holding% = BOW : %allow%'
+      effects:
+        - DECREASE_DAMAGE:8 @Victim
+    '5':
+      chance: 21
+      cooldown: 4
+      conditions:
+        - '%attacker is holding% = BOW : %allow%'
+      effects:
+        - DECREASE_DAMAGE:10 @Victim
+devour:
+  display: '%group-color%狂人日记'
+  description: 概率吃掉你杀死的生物恢复饱食度
+  applies-to: 武器
+  type: KILL_MOB
+  group: UNIQUE
+  applies:
+    - ALL_SWORD
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 10
+      effects:
+        - ADD_FOOD:1
+    '2':
+      chance: 15
+      effects:
+        - ADD_FOOD:1
+    '3':
+      chance: 20
+      effects:
+        - ADD_FOOD:1
+replenish:
+  display: '%group-color%食物补充'
+  description: 在挖矿时概率恢复饱食度
+  applies-to: 镐
+  type: MINING
+  group: ELITE
+  applies:
+    - ALL_PICKAXE
+  levels:
+    '1':
+      chance: 30
+      effects:
+        - ADD_FOOD:1
+    '2':
+      chance: 40
+      effects:
+        - ADD_FOOD:2
+    '3':
+      chance: 60
+      effects:
+        - ADD_FOOD:3
+hellfire:
+  display: '%group-color%火焰弓'
+  description: 概率使箭变成火球
+  applies-to: 弓
+  type: SHOOT;SHOOT_MOB
+  group: ULTIMATE
+  applies:
+    - BOW
+  levels:
+    '1':
+      chance: 10
+      cooldown: 3
+      effects:
+        - FIREBALL @Victim
+    '2':
+      chance: 25
+      cooldown: 3
+      effects:
+        - FIREBALL @Victim
+    '3':
+      chance: 35
+      cooldown: 3
+      effects:
+        - FIREBALL @Victim
+    '4':
+      chance: 50
+      cooldown: 3
+      effects:
+        - FIREBALL @Victim
+    '5':
+      chance: 70
+      cooldown: 3
+      effects:
+        - FIREBALL @Victim
+missile:
+  display: '%group-color%火焰弩'
+  description: 概率使箭变成火球
+  applies-to: 弩
+  type: SHOOT;SHOOT_MOB
+  group: ELITE
+  applies:
+    - CROSSBOW
+  levels:
+    '1':
+      chance: 10
+      cooldown: 3
+      effects:
+        - FIREBALL @Victim
+    '2':
+      chance: 25
+      cooldown: 3
+      effects:
+        - FIREBALL @Victim
+    '3':
+      chance: 35
+      cooldown: 3
+      effects:
+        - FIREBALL @Victim
+    '4':
+      chance: 50
+      cooldown: 3
+      effects:
+        - FIREBALL @Victim
+    '5':
+      chance: 70
+      cooldown: 3
+      effects:
+        - FIREBALL @Victim
+tank:
+  display: '%group-color%坦克'
+  description: 每一级概率降低2%斧头伤害
+  applies-to: 装备护甲
+  type: DEFENSE;DEFENSE_MOB
+  group: ULTIMATE
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 5
+      cooldown: 3
+      conditions:
+        - '%attacker is holding% contains AXE : %allow%'
+      effects:
+        - DECREASE_DAMAGE:2 @Victim
+    '2':
+      chance: 8
+      cooldown: 3
+      conditions:
+        - '%attacker is holding% contains AXE : %allow%'
+      effects:
+        - DECREASE_DAMAGE:4 @Victim
+    '3':
+      chance: 12
+      cooldown: 3
+      conditions:
+        - '%attacker is holding% contains AXE : %allow%'
+      effects:
+        - DECREASE_DAMAGE:6 @Victim
+    '4':
+      chance: 16
+      cooldown: 3
+      conditions:
+        - '%attacker is holding% contains AXE : %allow%'
+      effects:
+        - DECREASE_DAMAGE:8 @Victim
+critical:
+  display: '%group-color%致命一击'
+  description: 增加跳劈产生的暴击伤害
+  applies-to: 剑
+  type: ATTACK_MOB;ATTACK
+  group: ELITE
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 7
+      cooldown: 5
+      conditions:
+        - '%is critical% = true : %allow%'
+      effects:
+        - INCREASE_DAMAGE:10
+    '2':
+      chance: 8
+      cooldown: 5
+      conditions:
+        - '%is critical% = true : %allow%'
+      effects:
+        - INCREASE_DAMAGE:15
+    '3':
+      chance: 12
+      cooldown: 5
+      conditions:
+        - '%is critical% = true : %allow%'
+      effects:
+        - INCREASE_DAMAGE:20
+rebound:
+  display: '%group-color%恢复'
+  description: 击杀敌人时概率恢复生命
+  applies-to: 武器
+  type: KILL_PLAYER;KILL_MOB
+  group: LEGENDARY
+  applies:
+    - ALL_AXE
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 25
+      cooldown: 5
+      effects:
+        - ADD_HEALTH:2 @Attacker
+    '2':
+      chance: 35
+      cooldown: 5
+      effects:
+        - ADD_HEALTH:4 @Attacker
+    '3':
+      chance: 45
+      cooldown: 5
+      effects:
+        - ADD_HEALTH:6 @Attacker
+thunderlord:
+  display: '%group-color%雷击'
+  description: 命中三次时概率释放雷击
+  applies-to: 武器
+  type: ATTACK_MOB
+  group: LEGENDARY
+  applies:
+    - ALL_AXE
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 25
+      cooldown: 2
+      conditions:
+        - '%attacker combo% > 2 : %allow%'
+      effects:
+        - LIGHTNING @Victim
+        - RESET_COMBO @Attacker
+    '2':
+      chance: 45
+      cooldown: 2
+      conditions:
+        - '%attacker combo% > 2 : %allow%'
+      effects:
+        - LIGHTNING @Victim
+        - RESET_COMBO @Attacker
+    '3':
+      chance: 55
+      cooldown: 2
+      conditions:
+        - '%attacker combo% > 2 : %allow%'
+      effects:
+        - LIGHTNING @Victim
+        - RESET_COMBO @Attacker
+netherling:
+  display: '%group-color%翼斩'
+  description: 对下界中的敌人造成双倍伤害
+  applies-to: 剑
+  type: ATTACK_MOB
+  group: ULTIMATE
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 25
+      conditions:
+        - '%player world% contains NETHER : %allow%'
+      effects:
+        - INCREASE_DAMAGE:50
+    '2':
+      chance: 50
+      conditions:
+        - '%player world% contains NETHER : %allow%'
+      effects:
+        - INCREASE_DAMAGE:50
+    '3':
+      chance: 75
+      conditions:
+        - '%player world% contains NETHER : %allow%'
+      effects:
+        - INCREASE_DAMAGE:50
+creeperarmor:
+  display: '%group-color%爬行者'
+  description: |-
+    几乎免疫爆炸伤害，高等级有概率在爆炸中治疗
+  applies-to: 装备护甲
+  type: EXPLOSION
+  group: ULTIMATE
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 25
+      effects:
+        - CANCEL_EVENT
+    '2':
+      chance: 50
+      effects:
+        - CANCEL_EVENT
+    '3':
+      chance: 75
+      effects:
+        - CANCEL_EVENT
+        - ADD_HEALTH:<random number>1-2</random number>
+spirits:
+  display: '%group-color%火卫'
+  description: 概率产生守卫火焰
+  applies-to: 装备护甲
+  type: DEFENSE
+  group: ULTIMATE
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 2
+      cooldown: 8
+      effects:
+        - GUARD:BLAZE:8:3:@Victim
+    '2':
+      chance: 2
+      cooldown: 8
+      effects:
+        - GUARD:BLAZE:8:4:@Victim
+    '3':
+      chance: 3
+      cooldown: 8
+      effects:
+        - GUARD:BLAZE:8:4:@Victim
+    '4':
+      chance: 5
+      cooldown: 8
+      effects:
+        - GUARD:BLAZE:8:4:@Victim
+    '5':
+      chance: 8
+      cooldown: 8
+      effects:
+        - GUARD:BLAZE:8:4:@Victim
+    '6':
+      chance: 12
+      cooldown: 8
+      effects:
+        - GUARD:BLAZE:8:4:@Victim
+    '7':
+      chance: 15
+      cooldown: 8
+      effects:
+        - GUARD:BLAZE:8:4:@Victim
+    '8':
+      chance: 19
+      cooldown: 8
+      effects:
+        - GUARD:BLAZE:8:4:@Victim
+    '9':
+      chance: 22
+      cooldown: 8
+      effects:
+        - GUARD:BLAZE:8:4:@Victim
+    '10':
+      chance: 27
+      cooldown: 8
+      effects:
+        - GUARD:BLAZE:8:5:@Victim
+bleed:
+  display: '%group-color%流血'
+  description: 概率让你的对手流血
+  applies-to: 斧
+  type: ATTACK;ATTACK_MOB
+  group: ULTIMATE
+  applies:
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 1
+      effects:
+        - POTION:SLOW:0:100 @Victim
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+    '2':
+      chance: 2
+      effects:
+        - POTION:SLOW:0:100 @Victim
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+    '3':
+      chance: 3
+      effects:
+        - POTION:SLOW:0:100 @Victim
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+    '4':
+      chance: 4
+      effects:
+        - POTION:SLOW:0:100 @Victim
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+    '5':
+      chance: 5
+      effects:
+        - POTION:SLOW:0:100 @Victim
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+    '6':
+      chance: 10
+      effects:
+        - POTION:SLOW:0:100 @Victim
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+        - WAIT:20
+        - DO_HARM:<random number>1-3</random number> @Victim
+lavawalker:
+  display: '%group-color%岩浆行者'
+  description: 在岩浆上行走
+  applies-to: 靴子
+  type: EFFECT_STATIC
+  group: LEGENDARY
+  applies:
+    - ALL_BOOTS
+  levels:
+    '1':
+      effects:
+        - LAVA_WALKER
+waterwalker:
+  display: '%group-color%水之行者'
+  description: 在水上行走
+  applies-to: 靴子
+  type: EFFECT_STATIC
+  group: LEGENDARY
+  applies:
+    - ALL_BOOTS
+  levels:
+    '1':
+      effects:
+        - WATER_WALKER
+aqua:
+  display: '%group-color%水之护佑'
+  description: 在水中伤害概率翻倍
+  applies-to: 靴子
+  type: ATTACK;ATTACK_MOB
+  group: LEGENDARY
+  applies:
+    - ALL_BOOTS
+  levels:
+    '1':
+      chance: 8
+      cooldown: 3
+      conditions:
+        - '%is under water% = TRUE : %allow%'
+      effects:
+        - DOUBLE_DAMAGE
+    '2':
+      chance: 13
+      cooldown: 3
+      conditions:
+        - '%is under water% = TRUE : %allow%'
+      effects:
+        - DOUBLE_DAMAGE
+    '3':
+      chance: 19
+      cooldown: 5
+      conditions:
+        - '%is under water% = TRUE : %allow%'
+      effects:
+        - DOUBLE_DAMAGE
+    '4':
+      chance: 23
+      cooldown: 5
+      conditions:
+        - '%is under water% = TRUE : %allow%'
+      effects:
+        - DOUBLE_DAMAGE
+divert:
+  display: '%group-color%毒甲'
+  description: 概率使对手中毒并恢复生命
+  applies-to: 装备护甲
+  type: DEFENSE;DEFENSE_MOB
+  group: LEGENDARY
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 2
+      cooldown: 20
+      effects:
+        - POTION:POISON:0:100 @Attacker
+        - POTION:REGENERATION:0:100 @Victim
+    '2':
+      chance: 5
+      cooldown: 20
+      effects:
+        - POTION:POISON:0:100 @Attacker
+        - POTION:REGENERATION:0:100 @Victim
+    '3':
+      chance: 6
+      cooldown: 20
+      effects:
+        - POTION:POISON:0:100 @Attacker
+        - POTION:REGENERATION:0:100 @Victim
+    '4':
+      chance: 7
+      cooldown: 20
+      effects:
+        - POTION:POISON:0:100 @Attacker
+        - POTION:REGENERATION:1:60 @Victim
+    '5':
+      chance: 9
+      cooldown: 25
+      effects:
+        - POTION:POISON:0:100 @Attacker
+        - POTION:REGENERATION:1:100 @Victim
+unholy:
+  display: '%group-color%邪恶'
+  description: 概率防御虚弱和凋零效果的伤害
+  applies-to: 装备护甲
+  type: DEFENSE
+  group: LEGENDARY
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 2
+      cooldown: 40
+      effects:
+        - POTION:WITHER:0:60 @Attacker
+        - POTION:WEAKNESS:0:100 @Attacker
+    '2':
+      chance: 4
+      cooldown: 40
+      effects:
+        - POTION:WITHER:1:60 @Attacker
+        - POTION:WEAKNESS:0:5 @Attacker
+    '3':
+      chance: 6
+      cooldown: 40
+      effects:
+        - POTION:WITHER:1:60 @Attacker
+        - POTION:WEAKNESS:0:100 @Attacker
+    '4':
+      chance: 8
+      cooldown: 40
+      effects:
+        - POTION:WITHER:1:60 @Attacker
+        - POTION:WEAKNESS:0:100 @Attacker
+    '5':
+      chance: 10
+      cooldown: 40
+      effects:
+        - POTION:WITHER:1:60 @Attacker
+        - POTION:WEAKNESS:0:100 @Attacker
+chaos:
+  display: '%group-color%混沌戟'
+  description: 概率造成虚弱和调灵
+  applies-to: 三叉戟
+  type: SHOOT;SHOOT_MOB
+  group: LEGENDARY
+  applies:
+    - TRIDENT
+  levels:
+    '1':
+      chance: 2
+      cooldown: 40
+      effects:
+        - POTION:WITHER:0:60 @Victim
+        - POTION:WEAKNESS:0:100 @Victim
+    '2':
+      chance: 4
+      cooldown: 40
+      effects:
+        - POTION:WITHER:1:60 @Victim
+        - POTION:WEAKNESS:0:5 @Victim
+    '3':
+      chance: 6
+      cooldown: 40
+      effects:
+        - POTION:WITHER:1:60 @Victim
+        - POTION:WEAKNESS:0:100 @Victim
+    '4':
+      chance: 8
+      cooldown: 40
+      effects:
+        - POTION:WITHER:1:60 @Victim
+        - POTION:WEAKNESS:0:100 @Victim
+    '5':
+      chance: 10
+      cooldown: 40
+      effects:
+        - POTION:WITHER:1:60 @Victim
+        - POTION:WEAKNESS:0:100 @Victim
+convulse:
+  display: '%group-color%击飞'
+  description: 概率把你的敌人抛向空中
+  applies-to: 靴子
+  type: DEFENSE;DEFENSE_MOB
+  group: LEGENDARY
+  applies:
+    - ALL_BOOTS
+  levels:
+    '1':
+      chance: 8
+      cooldown: 10
+      effects:
+        - BOOST:UP:5 @Attacker
+    '2':
+      chance: 10
+      cooldown: 10
+      effects:
+        - BOOST:UP:6 @Attacker
+    '3':
+      chance: 12
+      cooldown: 10
+      effects:
+        - BOOST:UP:7 @Attacker
+    '4':
+      chance: 14
+      cooldown: 10
+      effects:
+        - BOOST:UP:8 @Attacker
+    '5':
+      chance: 16
+      cooldown: 10
+      effects:
+        - BOOST:UP:9 @Attacker
+    '6':
+      chance: 18
+      cooldown: 10
+      effects:
+        - BOOST:UP:10 @Attacker
+barbarian:
+  display: '%group-color%野蛮人'
+  description: 概率造成更多伤害
+  applies-to: 斧
+  type: ATTACK;ATTACK_MOB
+  group: LEGENDARY
+  applies:
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 8
+      cooldown: 8
+      conditions:
+        - '%attacker is holding% contains AXE : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>25-100</random number> @Victim
+    '2':
+      chance: 15
+      cooldown: 8
+      conditions:
+        - '%attacker is holding% contains AXE : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>25-100</random number> @Victim
+    '3':
+      chance: 19
+      cooldown: 8
+      conditions:
+        - '%attacker is holding% contains AXE : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>25-100</random number> @Victim
+    '4':
+      chance: 25
+      cooldown: 8
+      conditions:
+        - '%attacker is holding% contains AXE : %allow%'
+      effects:
+        - INCREASE_DAMAGE:<random number>25-100</random number> @Victim
+lucid:
+  display: '%group-color%清醒'
+  description: 概率治愈失明并获得夜视
+  applies-to: 装备护甲
+  type: DEFENSE;DEFENSE_MOB
+  group: LEGENDARY
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 22
+      cooldown: 5
+      effects:
+        - CURE:BLINDNESS @Victim
+        - POTION:NIGHT_VISION:0:40 @Victim
+    '2':
+      chance: 32
+      cooldown: 5
+      effects:
+        - CURE:BLINDNESS @Victim
+        - POTION:NIGHT_VISION:0:60 @Victim
+    '3':
+      chance: 42
+      cooldown: 5
+      effects:
+        - CURE:BLINDNESS @Victim
+        - POTION:NIGHT_VISION:0:80 @Victim
+doublestrike:
+  display: '%group-color%双剑'
+  description: 概率攻击两次
+  applies-to: 剑
+  type: ATTACK;ATTACK_MOB
+  group: LEGENDARY
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 8
+      cooldown: 15
+      effects:
+        - WAIT:20
+        - DO_HARM:%damage% @Victim
+        - BLOOD @Victim
+    '2':
+      chance: 13
+      cooldown: 15
+      effects:
+        - WAIT:20
+        - DO_HARM:%damage% @Victim
+        - BLOOD @Victim
+    '3':
+      chance: 19
+      cooldown: 15
+      effects:
+        - WAIT:20
+        - DO_HARM:%damage% @Victim
+        - BLOOD @Victim
+inflame:
+  display: '%group-color%激怒喷'
+  description: 概率使周围玩家着火
+  applies-to: 斧
+  group: LEGENDARY
+  type: ATTACK
+  applies:
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 10
+      cooldown: 4
+      effects:
+        - PARTICLE:FALLING_LAVA:5:0 <aoe> radius=2 target=damageable </aoe>
+        - BURN:40 <aoe> radius=2 target=damageable </aoe>
+    '2':
+      chance: 12
+      cooldown: 5
+      effects:
+        - PARTICLE:FALLING_LAVA:5:0 <aoe> radius=4 target=damageable </aoe>
+        - BURN:50 <aoe> radius=6 target=damageable </aoe>
+    '3':
+      chance: 16
+      cooldown: 5
+      effects:
+        - PARTICLE:FALLING_LAVA:5:0 <aoe> radius=4 target=damageable </aoe>
+        - BURN:60 <aoe> radius=4 target=damageable </aoe>
+immolation:
+  display: '%group-color%激怒'
+  description: 概率使周围玩家着火
+  applies-to: 剑
+  group: ULTIMATE
+  type: ATTACK_MOB
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 10
+      cooldown: 4
+      effects:
+        - PARTICLE:FALLING_LAVA:5:0 @Aoe{radius=2,target=mobs}
+        - BURN:40 @Aoe{radius=2,target=mobs}
+    '2':
+      chance: 12
+      cooldown: 5
+      effects:
+        - PARTICLE:FALLING_LAVA:5:0@Aoe{radius=4,target=mobs}
+        - BURN:50 @Aoe{radius=4,target=mobs}
+    '3':
+      chance: 16
+      cooldown: 5
+      effects:
+        - PARTICLE:FALLING_LAVA:5:0 @Aoe{radius=6,target=mobs}
+        - BURN:60 @Aoe{radius=6,target=mobs}
+inquisitive:
+  display: '%group-color%经验提升'
+  description: 概率增加怪物掉落经验
+  applies-to: 剑
+  type: KILL_MOB
+  group: LEGENDARY
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 30
+      cooldown: 4
+      effects:
+        - EXP:<math>%exp% * (1.0 + 0.25 * %level%)</math> @Victim
+    '2':
+      chance: 35
+      cooldown: 4
+      effects:
+        - EXP:<math>%exp% * (1.0 + 0.25 * %level%)</math> @Victim
+    '3':
+      chance: 40
+      cooldown: 4
+      effects:
+        - EXP:<math>%exp% * (1.0 + 0.25 * %level%)</math> @Victim
+    '4':
+      chance: 55
+      cooldown: 4
+      effects:
+        - EXP:<math>%exp% * (1.0 + 0.25 * %level%)</math> @Victim
+lifesteal:
+  display: '%group-color%吸血'
+  description: 概率吸取敌人血量
+  applies-to: 剑
+  type: ATTACK;ATTACK_MOB
+  group: LEGENDARY
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 2
+      cooldown: 15
+      effects:
+        - STEAL_HEALTH:<random number>1-3</random number> @Attacker
+    '2':
+      chance: 3
+      cooldown: 15
+      effects:
+        - STEAL_HEALTH:<random number>1-3</random number> @Attacker
+    '3':
+      chance: 4
+      cooldown: 15
+      effects:
+        - STEAL_HEALTH:<random number>1-4</random number> @Attacker
+    '4':
+      chance: 4
+      cooldown: 15
+      effects:
+        - STEAL_HEALTH:<random number>1-5</random number> @Attacker
+    '5':
+      chance: 5
+      cooldown: 15
+      effects:
+        - STEAL_HEALTH:<random number>1-5</random number> @Attacker
+overload:
+  display: '%group-color%生命增幅'
+  description: 获得更多生命值
+  applies-to: 装备护甲
+  type: EFFECT_STATIC
+  group: LEGENDARY
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      effects:
+        - POTION:HEALTH_BOOST:0
+    '2':
+      effects:
+        - POTION:HEALTH_BOOST:1
+    '3':
+      effects:
+        - POTION:HEALTH_BOOST:2
+blacksmith:
+  display: '%group-color%修理'
+  description: 概率修理武器，但是伤害会降低
+  applies-to: 斧
+  type: ATTACK;ATTACK_MOB
+  group: LEGENDARY
+  applies:
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 9
+      cooldown: 3
+      effects:
+        - ADD_DURABILITY_CURRENT_ITEM:-3
+        - HALF_DAMAGE
+        - PARTICLE:BLOCK_DUST:20:1
+    '2':
+      chance: 15
+      cooldown: 3
+      effects:
+        - ADD_DURABILITY_CURRENT_ITEM:-3
+        - HALF_DAMAGE
+        - PARTICLE:BLOCK_DUST:20:1
+    '3':
+      chance: 23
+      cooldown: 3
+      effects:
+        - ADD_DURABILITY_CURRENT_ITEM:-3
+        - HALF_DAMAGE
+        - PARTICLE:BLOCK_DUST:20:1
+    '4':
+      chance: 31
+      cooldown: 3
+      effects:
+        - ADD_DURABILITY_CURRENT_ITEM:-4
+        - HALF_DAMAGE
+        - PARTICLE:BLOCK_DUST:20:1
+    '5':
+      chance: 39
+      cooldown: 3
+      effects:
+        - ADD_DURABILITY_CURRENT_ITEM:-4
+        - HALF_DAMAGE
+        - PARTICLE:BLOCK_DUST:20:1
+immortal:
+  display: '%group-color%不朽'
+  description: 概率不掉耐久
+  applies-to: 装备护甲
+  type: DEFENSE;DEFENSE_MOB
+  group: FABLED
+  applies:
+    - ALL_ARMOR
+  levels:
+    '1':
+      chance: 12
+      cooldown: 40
+      effects:
+        - ADD_DURABILITY:-10 @Victim
+    '2':
+      chance: 18
+      cooldown: 40
+      effects:
+        - ADD_DURABILITY:-10 @Victim
+    '3':
+      chance: 25
+      cooldown: 40
+      effects:
+        - ADD_DURABILITY:-10 @Victim
+    '4':
+      chance: 31
+      cooldown: 40
+      effects:
+        - ADD_DURABILITY:-10 @Victim
+striker:
+  display: '%group-color%箭雨'
+  description: 概率释放箭雨
+  applies-to: 弓
+  type: SHOOT;SHOOT_MOB
+  group: ULTIMATE
+  applies:
+    - BOW
+  levels:
+    '1':
+      chance: 9
+      cooldown: 8
+      effects:
+        - SPAWN_ARROWS @Victim
+    '2':
+      chance: 10
+      cooldown: 8
+      effects:
+        - SPAWN_ARROWS @Victim
+    '3':
+      chance: 11
+      cooldown: 8
+      effects:
+        - SPAWN_ARROWS @Victim
+deadshot:
+  display: '%group-color%猎颅者'
+  description: 三叉戟命中头概率造成双倍伤害
+  applies-to: 三叉戟
+  type: SHOOT;SHOOT_MOB
+  group: LEGENDARY
+  applies:
+    - TRIDENT
+  levels:
+    '1':
+      chance: 15
+      cooldown: 5
+      conditions:
+        - '%is headshot% = true : %allow%'
+      effects:
+        - INCREASE_DAMAGE:100 @Attacker
+    '2':
+      chance: 20
+      cooldown: 5
+      conditions:
+        - '%is headshot% = true : %allow%'
+      effects:
+        - INCREASE_DAMAGE:100 @Attacker
+    '3':
+      chance: 25
+      cooldown: 5
+      conditions:
+        - '%is headshot% = false : %stop%'
+      effects:
+        - INCREASE_DAMAGE:100 @Attacker
+    '4':
+      chance: 30
+      cooldown: 5
+      conditions:
+        - '%is headshot% = false : %stop%'
+      effects:
+        - INCREASE_DAMAGE:100 @Attacker
+    '5':
+      chance: 35
+      cooldown: 5
+      conditions:
+        - '%is headshot% = false : %stop%'
+      effects:
+        - INCREASE_DAMAGE:100 @Attacker
+neutralize:
+  display: '%group-color%射击缴械'
+  description: 概率使对手丢弃手中装备.
+  applies-to: 弓, 弩
+  type: SHOOT
+  group: FABLED
+  applies:
+    - BOW
+    - CROSSBOW
+  levels:
+    '1':
+      chance: 2
+      cooldown: 200
+      effects:
+        - DISARM @Victim
+disarm:
+  display: '%group-color%缴械'
+  description: 概率使对手丢弃手中装备
+  applies-to: 剑
+  type: ATTACK
+  group: FABLED
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 1
+      cooldown: 200
+      effects:
+        - DISARM @Victim
+    '2':
+      chance: 2
+      cooldown: 200
+      effects:
+        - DISARM @Victim
+phoenix:
+  display: '%group-color%复活'
+  description: 被击中时概率复活
+  applies-to: 胸甲
+  type: DEATH
+  group: FABLED
+  applies:
+    - ALL_CHESTPLATE
+  levels:
+    '1':
+      chance: 1
+      cooldown: 20
+      effects:
+        - REVIVE @Victim
+    '2':
+      chance: 2
+      cooldown: 20
+      effects:
+        - REVIVE @Victim
+    '3':
+      chance: 5
+      cooldown: 20
+      effects:
+        - REVIVE @Victim
+scare:
+  display: '%group-color%南瓜批发'
+  description: |-
+    概率给对手短时间戴南瓜头
+  applies-to: 武器
+  type: ATTACK
+  group: FABLED
+  applies:
+    - ALL_SWORD
+    - ALL_AXE
+  levels:
+    '1':
+      chance: 1.8
+      cooldown: 20
+      effects:
+        - PUMPKIN:40 @Victim
+        - PLAY_SOUND_OUTLOUD:BLOCK_ANVIL_LAND
+    '2':
+      chance: 3.6
+      cooldown: 20
+      effects:
+        - PUMPKIN:40 @Victim
+        - PLAY_SOUND_OUTLOUD:BLOCK_ANVIL_LAND
+    '3':
+      chance: 4.4
+      cooldown: 20
+      effects:
+        - PUMPKIN:60 @Victim
+        - PLAY_SOUND_OUTLOUD:BLOCK_ANVIL_LAND
+    '4':
+      chance: 5.2
+      cooldown: 20
+      effects:
+        - PUMPKIN:60 @Victim
+        - PLAY_SOUND_OUTLOUD:BLOCK_ANVIL_LAND
+    '5':
+      chance: 6
+      cooldown: 20
+      effects:
+        - PUMPKIN:80 @Victim
+        - PLAY_SOUND_OUTLOUD:BLOCK_ANVIL_LAND
+strife:
+  display: '%group-color%突刺'
+  description: 增加三叉戟近战伤害
+  applies-to: 三叉戟
+  type: ATTACK;ATTACK_MOB
+  group: LEGENDARY
+  applies:
+    - TRIDENT
+  levels:
+    '1':
+      chance: 5
+      cooldown: 3
+      effects:
+        - INCREASE_DAMAGE:15
+    '2':
+      chance: 10
+      cooldown: 6
+      effects:
+        - INCREASE_DAMAGE:25
+    '3':
+      chance: 15
+      cooldown: 8
+      effects:
+        - INCREASE_DAMAGE:30
+spark:
+  display: '%group-color%恶魔戟'
+  description: 概率点燃对手
+  applies-to: 三叉戟
+  type: ATTACK;ATTACK_MOB;SHOOT;SHOOT_MOB
+  group: ELITE
+  applies:
+    - TRIDENT
+  levels:
+    '1':
+      chance: 25
+      cooldown: 3
+      effects:
+        - BURN:40 @Victim
+    '2':
+      chance: 35
+      cooldown: 6
+      effects:
+        - BURN:40 @Victim
+    '3':
+      chance: 36
+      cooldown: 8
+      effects:
+        - BURN:40 @Victim
+aegis:
+  display: '%group-color%摔落加速'
+  description: 概率在收到摔落伤害时获得速度
+  applies-to: 靴子
+  type: FALL_DAMAGE
+  group: ULTIMATE
+  applies:
+    - ALL_BOOTS
+  levels:
+    '1':
+      chance: 40
+      cooldown: 3
+      effects:
+        - POTION:SPEED:0:60
+    '2':
+      chance: 60
+      cooldown: 3
+      effects:
+        - POTION:SPEED:1:60
+    '3':
+      chance: 70
+      cooldown: 3
+      effects:
+        - POTION:SPEED:2:60
+plummet:
+  display: '%group-color%英雄登场'
+  description: 受到摔落伤害时，对周围怪物造成伤害
+  applies-to: 靴子
+  type: FALL_DAMAGE
+  group: ULTIMATE
+  applies:
+    - ALL_BOOTS
+  levels:
+    '1':
+      chance: 40
+      effects:
+        - DO_HARM:2 @Aoe{radius=3,target=mobs}
+    '2':
+      chance: 80
+      effects:
+        - DO_HARM:3 @Aoe{radius=5,target=mobs}
+    '3':
+      effects:
+        - DO_HARM:5 @Aoe{radius=8,target=mobs}
+nightowl:
+  display: '%group-color%夜行者'
+  description: 在夜间可造成更多的伤害
+  applies-to: 剑
+  type: ATTACK_MOB
+  group: ULTIMATE
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 40
+      conditions:
+        - '%is night% = true : %allow%'
+      effects:
+        - INCREASE_DAMAGE:25
+    '2':
+      chance: 60
+      conditions:
+        - '%is night% = true : %allow%'
+      effects:
+        - INCREASE_DAMAGE:35
+    '3':
+      chance: 80
+      conditions:
+        - '%is night% = true : %allow%'
+      effects:
+        - INCREASE_DAMAGE:45
+nightwalker:
+  display: '%group-color%夜之凝视'
+  description: 概率在夜间冻结敌人
+  applies-to: 剑
+  type: ATTACK_MOB
+  group: ELITE
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 40
+      conditions:
+        - '%is night% = true : %allow%'
+      effects:
+        - POTION:SLOW:10:400 @Victim
+    '2':
+      chance: 70
+      conditions:
+        - '%is night% = true : %allow%'
+      effects:
+        - POTION:SLOW:10:400 @Victim
+    '3':
+      chance: 100
+      conditions:
+        - '%is night% = true : %allow%'
+      effects:
+        - POTION:SLOW:10:400 @Victim
+launch:
+  display: '%group-color%踏板'
+  description: 左键时概率起跳
+  applies-to: 剑
+  type: LEFT_CLICK
+  group: LEGENDARY
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 20
+      cooldown: 15
+      effects:
+        - BOOST:UP:8
+        - PARTICLE:CLOUD:20:2
+    '2':
+      chance: 27
+      cooldown: 15
+      effects:
+        - BOOST:UP:9
+        - PARTICLE:CLOUD:20:2
+    '3':
+      chance: 65
+      cooldown: 10
+      effects:
+        - BOOST:UP:10
+        - PARTICLE:CLOUD:20:2
+magnet:
+  display: '%group-color%磁力剑'
+  description: 概率将敌人拉向你
+  applies-to: 剑
+  type: ATTACK
+  group: ELITE
+  applies:
+    - ALL_SWORD
+  levels:
+    '1':
+      chance: 30
+      cooldown: 5
+      effects:
+        - PULL_CLOSER:1 @Victim
+    '2':
+      chance: 60
+      cooldown: 5
+      effects:
+        - PULL_CLOSER:2 @Victim
+    '3':
+      cooldown: 5
+      effects:
+        - PULL_CLOSER:3 @Victim
